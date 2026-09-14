@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoLoan Pro </title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+    
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <span class="calc-badge">%</span>
+                    <svg class="car-symbol" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 17h1c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C17.9 10.4 16 9 16 9H8s-1.9 1.4-3.5 2.1C3.7 11.3 3 12.1 3 13v3c0 .6.4 1 1 1h1m2 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0zm10 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>AutoLoan Pro</h1>
+                
+                </div>
+            </div>
+        </header>
+
+        <main class="calculator-card">
+            <form id="loanForm" class="calculator-form" onsubmit="return false;">
+                
+                <div class="form-row row-three">
+                    <div class="input-group">
+                        <label for="carBrand">نوع السيارة</label>
+                        <input type="text" id="carBrand"  required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="carModel">موديل السيارة (السنة)</label>
+                        <input type="number" id="carModel" min="1900" max="2099" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="carPrice">سعر السيارة الإجمالي</label>
+                        <input type="number" id="carPrice"  min="0" required>
+                    </div>
+                </div>
+                <div class="form-row row-two">
+                    <div class="input-group">
+                        <label for="downPayment">قيمة المقدم</label>
+                        <input type="number" id="downPayment"  min="0" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="loanTerm">مدة التقسيط (بالشهور)</label>
+                        <select id="loanTerm" required>
+                            <option value="12">12 شهر (سنة)</option>
+                            <option value="24">24 شهر (سنتان)</option>
+                            <option value="36" selected>36 شهر (3 سنوات)</option>
+                            <option value="48">48 شهر (4 سنوات)</option>
+                            <option value="60">60 شهر (5 سنوات)</option>
+                            <option value="72">72 شهر (6 سنوات)</option>
+                            <option value="84">84 شهر (7 سنوات)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="results-section">
+                    <div class="results-grid">
+                        <div class="result-card primary">
+                            <span class="result-label">نسبة الفائدة السنوية (تقديرية)</span>
+                            <div class="result-value" id="interestRateDisplay">0%</div>
+                        </div>
+
+                        <div class="result-card highlight">
+                            <span class="result-label">القسط الشهري المتوقع</span>
+                            <div class="result-value" id="monthlyInstallmentDisplay">0 <span class="unit">ج.م</span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </main>
+    </div>
+
+    <script>
+        const carPriceInput = document.getElementById('carPrice');
+        const downPaymentInput = document.getElementById('downPayment');
+        const loanTermInput = document.getElementById('loanTerm');
+        
+        const monthlyInstallmentDisplay = document.getElementById('monthlyInstallmentDisplay');
+        const interestRateDisplay = document.getElementById('interestRateDisplay');
+
+        function getAnnualInterestRate(months) {
+            if (months <= 24) return 8.5;
+            if (months <= 48) return 10.0;
+            return 11.5;
+        }
+
+        function calculateLoan() {
+            const price = parseFloat(carPriceInput.value) || 0;
+            const downPayment = parseFloat(downPaymentInput.value) || 0;
+            const months = parseInt(loanTermInput.value) || 12;
+
+            if (price <= 0 || downPayment >= price) {
+                monthlyInstallmentDisplay.innerHTML = `0 <span class="unit">ج.م</span>`;
+                interestRateDisplay.textContent = "0%";
+                return;
+            }
+
+            const loanAmount = price - downPayment;
+            const annualRate = getAnnualInterestRate(months);
+            const years = months / 12;
+
+            const totalInterest = loanAmount * (annualRate / 100) * years;
+            const totalPayable = loanAmount + totalInterest;
+            const monthlyPayment = totalPayable / months;
+
+            interestRateDisplay.textContent = `${annualRate}%`;
+            monthlyInstallmentDisplay.innerHTML = `${Math.round(monthlyPayment).toLocaleString('ar-EG')} <span class="unit">ج.م</span>`;
+        }
+
+        carPriceInput.addEventListener('input', calculateLoan);
+        downPaymentInput.addEventListener('input', calculateLoan);
+        loanTermInput.addEventListener('change', calculateLoan);
+    </script>
+</body>
+</html>
