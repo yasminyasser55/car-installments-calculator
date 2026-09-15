@@ -1,217 +1,42 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Cairo', sans-serif;
-}
-
 body {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #f8fafc;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-.container {
+h1 {
+    color: #222;
+}
+
+form {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    width: 300px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select {
     width: 100%;
-    max-width: 900px; 
-    margin: auto;
-}
-.header {
-    display: flex;
-    justify-content: flex-start; 
-    margin-bottom: 20px;
+    padding: 5px;
+    margin-top: 3px;
+    box-sizing: border-box;
 }
 
-.logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    direction: ltr; 
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 15px 0;
 }
 
-.logo-icon {
-    position: relative;
-    background: #2563eb;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-}
-
-.calc-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #10b981;
-    color: #fff;
-    font-size: 10px;
-    font-weight: 800;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #0f172a;
-}
-
-.logo-text {
-    text-align: left;
-    line-height: 1.2;
-}
-
-.logo-text h1 {
-    font-size: 20px;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.logo-text span {
-    font-size: 11px;
-    color: #38bdf8;
-    font-weight: 700;
-    display: block;
-}
-
-
-.calculator-card {
-    background: #1e293b;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.calculator-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-
-.form-row {
-    display: grid;
-    gap: 15px;
-}
-
-.row-three {
-    grid-template-columns: repeat(3, 1fr); 
-}
-
-.row-two {
-    grid-template-columns: repeat(2, 1fr); 
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.input-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #cbd5e1;
-}
-
-.input-group input, 
-.input-group select {
-    width: 100%;
-    padding: 12px 16px;
-    background: #0f172a;
-    border: 1.5px solid #334155;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 15px;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.input-group input:focus, 
-.input-group select:focus {
-    border-color: #38bdf8;
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-}
-
-.input-group input::placeholder {
-    color: #64748b;
-}
-
-
-.results-section {
-    margin-top: 10px;
-    padding-top: 20px;
-    border-top: 1px dashed #334155;
-}
-
-.results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.result-card {
-    background: #0f172a;
-    padding: 18px;
-    border-radius: 12px;
-    border: 1px solid #334155;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-}
-
-.result-card.primary {
-    border-color: rgba(56, 189, 248, 0.3);
-    background: rgba(56, 189, 248, 0.05);
-}
-
-.result-card.highlight {
-    border-color: rgba(16, 185, 129, 0.3);
-    background: rgba(16, 185, 129, 0.05);
-}
-
-.result-label {
-    font-size: 13px;
-    color: #94a3b8;
-}
-
-.result-value {
-    font-size: 22px;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.result-card.primary .result-value {
-    color: #38bdf8;
-}
-
-.result-card.highlight .result-value {
-    color: #10b981;
-}
-
-.unit {
-    font-size: 13px;
-    font-weight: 600;
-}
-
-
-@media (max-width: 768px) {
-    .row-three, .row-two, .results-grid {
-        grid-template-columns: 1fr;
-    }
+b {
+    color: green;
 }
